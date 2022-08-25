@@ -127,6 +127,14 @@ It looks like vector_1 and vector_2 do not match because a was modified above.
 We will use the `setequal` function to compare them.
 This function takes two arguements and will return TRUE if they are equal else FALSE.
 
+To learn more about the function, we can run `?setequal` and see if help info is available.
+
+### Help function
+```{r}
+?setequal
+```
+
+
 ### Comparing vectors
 ```{r}
 setequal(vector_1, vector_2)
@@ -192,10 +200,38 @@ df1 = rbind(vector_1, vector_2, vector_3)
 print(df1)
 ```
 
-Use the commands `cbind` combine vectors as columns.
+### Column and row names
+
+Now that the data is in a multidimensional array, R has assigned row and col names.
+
+We can access those names using `colnames()` and `rownames()`.
 ```{r}
-df2 = cbind(vector_1, vector_2, vector_3)
-print(df2)
+colnames(df2)
+rownames(df2)
+```
+Notice, NULL is returned as the row names. This is because they have not been set yet.
+
+To get R to automatically assign row names add the argument `do.NULL=FALSE`.
+
+To learn more about this argument you can run `?rownames`.
+```{r}
+colnames(df2)
+rownames(df2, do.NULL=FALSE)
+```
+
+It can often be helpful to supply row and column names.
+
+See the next chunk for how to do so.
+
+```{r}
+colnames(df2) = c("Col1", "Col2", "Col3")
+rownames(df2) = c("Row1", "Row2", "Row3", "Row4")
+```
+Notice, no output is produced. Lets try printing the dataframe to see if our changes worked.
+
+```{r}
+colnames(df2)
+rownames(df2)
 ```
 
 This concludes the introduction to basic commands in R!
