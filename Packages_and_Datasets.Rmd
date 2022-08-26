@@ -117,14 +117,55 @@ To test, your knowledge, try the following:
 Now that we have examined working with and subsetting dataframes, let's import a 
 package and work with a more complex example. 
 
-Running this in a new project or on your own computer for the fist time you would need to run install.packages("tidyverse").  Thereafter you only need to turn on the package.  You will also be using data from the survival package for this exercise, so you need to load this package as well. 
+Running this in a new project or on your own computer for the fist time you would need to run install.packages("survival").  Thereafter you only need to turn on the package.  
 ```{r}
 library(survival)
-library(tidyverse)
 ```
+
+### PBC Dataset
+
 You will read in the pbc dataset from the survival package as a tibble. To find more information on the pbc dataset you can use ?pbc or use the help tab in the right hand side and search pbc.  This gives more information on how the data was created and what is in each column.
 ```{r}
 pbc
 ```
+Let's get an idea of what is in the data.
 
+We will start by getting the help documentation using the `?` function in R.
+```{r}
+?pbc
+```
+This will pull up the documentation in the help pane of R Studio.
+The help describes what the dataset is from and what variables are in it.
 
+We can also run the `summary` command to get an idea of what the data looks like.
+```{r}
+summary(pbc)
+```
+We can see from the output that some of the columns contain NA's or missing data.
+Missing data can cause some functions to not run or to return a NULL value, so
+it's important to note when data is missing.
+
+### Data Exploration
+You can also select single columns with a `$`.
+```{r}
+pbc$copper
+```
+You can use the `$` annotation to get summary information as well. 
+Note, if missing data is in the column, result will be NA unless na.rm is specified as TRUE. 
+```{r}
+mean(pbc$copper)
+mean(pbc$copper, na.rm = TRUE)
+```
+Other useful summary stats: min, max, and range.
+```{r}
+min(pbc$copper, na.rm = TRUE)
+max(pbc$copper, na.rm = TRUE)
+range(pbc$copper, na.rm = TRUE)
+```
+Data columns also have types and you can access this information with `typeof`.
+```{r}
+typeof(pbc$copper)
+typeof(pbc$ast)
+```
+
+This concludes your introduction to using packages and built-in datasets.
