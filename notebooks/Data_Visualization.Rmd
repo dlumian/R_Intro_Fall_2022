@@ -15,6 +15,15 @@ When you click the **Knit** button a document will be generated that includes bo
 library(survival)
 library(tidyverse)
 ```
+## Create a directory for output of images
+```{r cars}
+getwd()
+```
+```{r cars}
+img_path = "../images"
+dir.create(img_path)
+```
+
 # Data Visualization with ggplot
 
 Plotting a single discrete variable(sex) as a bar plot.  Here the y-axis is the number of patients that are male versus female.
@@ -74,5 +83,5 @@ ggplot(pbc_long , aes(value)) + geom_density() + facet_wrap(vars(key), scales = 
 
 We can save the last ggplot we created with the ggsave function.
 ```{r}
-ggsave("facet_density.png")
+ggsave(file.path(img_path, "facet_density.png"))
 ```
