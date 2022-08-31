@@ -1,0 +1,65 @@
+---
+title: "Data_Analysis"
+author: "Daniel Lumian"
+date: '2022-08-31'
+output: pdf_document
+---
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library(survival)
+library(tidyverse)
+```
+
+# Basic Statistics
+
+R is a great tool for statistics as well. Here we will explore a few basic analysis options.
+- Correlation
+  + Measure of how well two variables hang together
+  + Ranges from 1 to -1
+- t-tests
+  + Compares means of two groups
+Note, R has many more advanced statistical analyses, these are just two simple examples.
+
+```{r}
+cor.test(pbc$copper, pbc$albumin)
+```
+
+Let's visualize the relationship!
+```{r}
+ggplot(pbc, aes(x=copper, y=albumin)) + geom_point() + geom_smooth(method=lm)
+```
+
+Next, lets create two vectors for an independent samples t-test.
+We will compare males and females on age. 
+
+```{r}
+male_ages = pbc$age[pbc$sex=='m']
+female_ages = pbc$age[pbc$sex=='f']
+t.test(male_ages, female_ages)
+```
+
+Let's visualize the results with a bar graph.
+```{r}
+ggplot(pbc, aes(x=sex, y=age)) + 
+  geom_bar(stat = "summary", fun.y="mean")
+```
+Add error bars to the plot!
+Begin by calculating mean and standard deviation.
+```{r}
+age_barplot_data <- pbc %>% group_by(sex) %>% summarize(age_M = mean(age), age_SD = sd(age))
+age_barplot_data
+```
+Create the plot with the new dataset.
+```{r}
+ggplot(age_barplot_data, aes(x=sex, y=age_M, fill=sex)) + 
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(data = age_barplot_data, 
+      aes(ymin = age_M - age_SD, ymax = age_M + age_SD, y = age_M),
+        position = position_dodge(width = .9))
+```

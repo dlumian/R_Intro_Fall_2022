@@ -54,7 +54,7 @@ From this, we can tell that the data represents 3 species of Iris, with 50 examp
 
 ### Selecting Data
 
-To select a single row of data from the dataset, use a square bracket and specify 
+To select a single row of data from the dataset, use a square bracket`[rows, columns]` and specify 
 the row number followed by a `,`.
 ```{r}
 iris[1,]
@@ -76,7 +76,7 @@ You can also combine these methods to specify rows and columns simultaneously.
 iris[130-150, 1:3]
 ```
 
-Selecting rows and columns by index (number) can be useufl, but sometimes it more
+Selecting rows and columns by index (number) can be useful, but sometimes it more
 convenient to use labels. Conditions can also be applied when subsetting data.
 ```{r}
 iris[iris$Species=="setosa", ]
@@ -105,7 +105,7 @@ Here we will concat our output to ensure their meaning is clear.
 ```{r}
 column_of_interest = "Sepal.Length"
 col_mean = mean(iris[,column_of_interest])
-print(cat("The mean of the columm", column_of_interest, "is: ", col_mean))
+cat("The mean of the columm", column_of_interest, "is: ", col_mean)
 ```
 To test, your knowledge, try the following:
   1. Update the above code to get the mean of another column.

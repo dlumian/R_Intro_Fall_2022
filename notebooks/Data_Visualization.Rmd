@@ -85,3 +85,5 @@ We can save the last ggplot we created with the ggsave function.
 ```{r}
 ggsave(file.path(img_path, "facet_density.png"))
 ```
+
+This concludes the intro to Data Visualization in R!

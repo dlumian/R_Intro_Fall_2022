@@ -11,7 +11,9 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-Running this in a new project or on your own computer for the fist time you would need to run install.packages("survival").  Thereafter you only need to turn on the package.  
+Running this in a new project or on your own computer for the fist time you would need to run install.packages("survival").  Thereafter you only need to turn on the package. 
+
+THe `tidyverse` package will also have to be installed and turned on.
 ```{r}
 library(survival)
 library(tidyverse)

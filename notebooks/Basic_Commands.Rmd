@@ -20,6 +20,7 @@ Try executing this chunk by clicking the *Run* button within the chunk or by pla
 ```{r}
 2 + 1
 ```
+Notice the output is displayed below the code chunk.
 
 Below are several more chunks you can run to make R perform basic math operations.
 
@@ -55,9 +56,9 @@ Below are several more chunks you can run to make R perform basic math operation
 ## Assigning Variables
 Variables can be assigned and used in R.
 
-It can be helpful to represent objects as variables instead of their full details.
+It can be helpful to represent objects as variables instead of with their full details.
 
-The next examples are trivial but will be expanded on later in the session.
+The next examples are trivial but will be expanded upon later in the session.
 
 ### Assigning Variables
 ```{r}
