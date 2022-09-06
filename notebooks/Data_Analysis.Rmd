@@ -63,3 +63,13 @@ ggplot(age_barplot_data, aes(x=sex, y=age_M, fill=sex)) +
       aes(ymin = age_M - age_SD, ymax = age_M + age_SD, y = age_M),
         position = position_dodge(width = .9))
 ```
+
+
+```{r}
+table(pbc$status)
+```
+
+
+```{r}
+colnames(pbc)
+```

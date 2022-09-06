@@ -1,0 +1,138 @@
+---
+title: "Logistic_Regression_Example"
+author: "Daniel Lumian"
+date: '2022-09-06'
+output: pdf_document
+---
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+If you do not have the mlbench package installed, be sure to run `install.packages("mlbench")` and
+then run the cell below
+```{r}
+library(mlbench)
+```
+
+We will use the breast cancer data set from the mlbench package.
+We will only work with complete cases (i.e., those with no missing data)
+```{r}
+data(BreastCancer, package = "mlbench")
+bc = BreastCancer[complete.cases(BreastCancer), ] 
+bc
+```
+
+Run the below cell to see the help associated with this dataset.
+```{r}
+?BreastCancer
+```
+
+To get a better idea of the data, run `summary` on the dataset.
+Note, the target for this model will be `Class` which represents malignant or not.
+```{r}
+summary(bc)
+```
+
+For more information on how the data is stored in the dataframe, run `str` on the dataset.
+Note: The columns are set as factors with levels. When running a model on a factor
+the column will be dummy coded, so we will have to transform the data type for those columns.
+```{r}
+str(bc)
+```
+
+Let's start our data preparation by dropping the `id` column from the dataset.
+```{r}
+bc = bc[,-1]
+bc
+```
+
+Next, we will convert factors to numeric so they are modelled correctly.
+We do so with a for loop, which loops over the 9 remianing columns.
+```{r}
+for(i in 1:9) {
+  bc[, i] = as.numeric(as.character(bc[, i]))
+}
+str(bc)
+```
+
+We will next recode malignant and benign into numeric representation with a `1`
+representing malignant.
+```{r}
+bc$Class = ifelse(bc$Class == "malignant", 1, 0)
+bc$Class = factor(bc$Class, levels = c(0, 1))
+summary(bc$Class)
+```
+
+If you have not yet installed the caret package, run the following command:
+`install.packages(caret)`
+If you have not yet installed the yardstick package, run the following command:
+`install.packages(yardstick)`
+
+We will load two machine learning packages and set the seed to 1 for reproducible results.
+```{r}
+library(caret)
+library(yardstick)
+set.seed(1)
+```
+
+Next, lets create a training and test dataset from the dataframe. We will use 
+70% of the data to train with and 30% to test with.
+```{r}
+trainDataIndex = createDataPartition(bc$Class, p=0.7, list = FALSE)
+trainData = bc[trainDataIndex, ]
+testData = bc[-trainDataIndex, ]
+```
+
+Now that we have our train and test data, we will train the logistic model (logitmod)
+on the training portion of the data.
+
+We set the target as Class and then the predicting variables, type of model and
+data to be used.
+```{r}
+logitmod = glm(Class ~ Cl.thickness + Cell.size + Cell.shape, family = "binomial",
+               data = trainData)
+```
+
+We can use the summary function on the model to see the coefficient estimates.
+```{r}
+summary(logitmod)
+```
+
+Now that the model is trained, we can predict on our testing dataset.
+We can show the predictions for each row of the test dataset as a probability.
+```{r}
+pred = predict(logitmod, newdata = testData, type = "response")
+pred
+```
+We can transform the probabilities into classes by setting a threshold, here .5.
+We can then transform the classes into a factor and save the predictions back into
+the test dataset.
+```{r}
+y_pred_class = ifelse(pred > .5, 1, 0)
+y_pred_factor = factor(y_pred_class, levels=c(0,1))
+testData$preds = y_pred_factor
+```
+
+To get the accuracy of the predictions, we take the mean of when the true class
+matches the prediction class. We get an accuracy of 95%.
+```{r}
+mean(y_pred_factor == testData$Class)
+```
+
+We will use a confusion matrix to see how our model predictions perform.
+```{r}
+confusionMatrix(testData$Class, y_pred_factor)
+```
+
+We can plot the confusion matrix for a better visualization of the results. 
+```{r}
+cm <- conf_mat(testData, Class, preds)
+
+autoplot(cm, type = "heatmap") +
+  scale_fill_gradient(low = "steelblue", high = "darkred")
+```
+
+This concludes the Logistic Regression example in R.
