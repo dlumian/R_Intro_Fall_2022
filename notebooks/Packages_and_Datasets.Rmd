@@ -16,13 +16,13 @@ print('Hello, World!')
 ```
 
 ## Packages and Datasets
-There are many built-in functions and datasets include in R, which is known as base R.
+There are many built-in functions and data sets include in R, which is known as base R.
 
 In addition to base R, additional packages can be downloaded, imported and used.
 
-This markdown file will cover how to work with built-in datasets and imported packages.
+This markdown file will cover how to work with built-in data sets and imported packages.
 
-The following chuck will open a window with a list of built-in datasets you can experiment with.
+The following chuck will open a window with a list of built-in data sets you can experiment with.
 
 ```{r}
 data()
@@ -30,11 +30,11 @@ data()
 
 ## Iris Dataset
 
-For today's session we will begin by looking at a built-in dataset, known as iris.
+For today's session we will begin by looking at a built-in data set, known as iris.
 
-To see the data, simply start by running the word `iris` in a code block.
+To see the data, simply run the word `iris` in a code block.
 
-```{r cars}
+```{r}
 iris
 ```
 As shown, there are 5 columns and 150 rows.
@@ -50,11 +50,11 @@ R conveniently offers descriptive statistics for each numerical column.
 
 For the `Species` column, a count of the categorical variables is returned.
 
-From this, we can tell that the data represents 3 species of Iris, with 50 examples of each.
+From this, we can tell that the data represents 3 species of iris, with 50 examples of each.
 
 ### Selecting Data
 
-To select a single row of data from the dataset, use a square bracket`[rows, columns]` and specify 
+To select a single row of data from the data set, use a square bracket`[rows, columns]` and specify 
 the row number followed by a `,`.
 ```{r}
 iris[1,]
@@ -73,11 +73,11 @@ iris[,3]
 
 You can also combine these methods to specify rows and columns simultaneously. 
 ```{r}
-iris[130-150, 1:3]
+iris[130:150, 1:3]
 ```
 
 Selecting rows and columns by index (number) can be useful, but sometimes it more
-convenient to use labels. Conditions can also be applied when subsetting data.
+convenient to use labels. Conditions can also be applied when sub-setting data.
 ```{r}
 iris[iris$Species=="setosa", ]
 ```
@@ -85,7 +85,7 @@ iris[iris$Species=="setosa", ]
 In the above example, by leaving the space following the comma blank, it will
 return all columns of data. 
 
-You can specify specfic columns to be returned as well. For example,
+You can specify columns to be returned as well. For example,
 ```{r}
 iris[iris$Species=="setosa", c("Sepal.Length", "Sepal.Width")]
 ```
@@ -96,7 +96,7 @@ colnames(iris)
 
 ## Vector math on datasets
 The Basic_Commands.Rmd tutorial covered vector operations. You can apply those
-examples to columns or rows of a dataset.
+examples to columns or rows of a data set.
 
 Let's also introduce the `cat` command here. `cat` is used to concatenate info together.
 
@@ -114,17 +114,17 @@ To test, your knowledge, try the following:
 
 ## Packages
 
-Now that we have examined working with and subsetting dataframes, let's import a 
+Now that we have examined working with and subsetting data frames, let's import a 
 package and work with a more complex example. 
 
-Running this in a new project or on your own computer for the fist time you would need to run install.packages("survival").  Thereafter you only need to turn on the package.  
+Running this in a new project or on your own computer for the fist time you would need to run `install.packages("survival")`.  Thereafter you only need to turn on the package, as shown below.  
 ```{r}
 library(survival)
 ```
 
 ### PBC Dataset
 
-You will read in the pbc dataset from the survival package as a tibble. To find more information on the pbc dataset you can use ?pbc or use the help tab in the right hand side and search pbc.  This gives more information on how the data was created and what is in each column.
+You will read in the pbc data set from the survival package. To find more information on the pbc data set you can use ?pbc or use the help tab in the right hand side and search pbc.  This gives more information on how the data was created and what is in each column.
 ```{r}
 pbc
 ```
@@ -135,7 +135,7 @@ We will start by getting the help documentation using the `?` function in R.
 ?pbc
 ```
 This will pull up the documentation in the help pane of R Studio.
-The help describes what the dataset is from and what variables are in it.
+The help describes what the data set is from and what variables are in it.
 
 We can also run the `summary` command to get an idea of what the data looks like.
 ```{r}
@@ -151,7 +151,7 @@ You can also select single columns with a `$`.
 pbc$copper
 ```
 You can use the `$` annotation to get summary information as well. 
-Note, if missing data is in the column, result will be NA unless na.rm is specified as TRUE. 
+Note, if missing data is in the column, result will be NA unless `na.rm` is specified as `TRUE`. 
 ```{r}
 mean(pbc$copper)
 mean(pbc$copper, na.rm = TRUE)
@@ -168,4 +168,4 @@ typeof(pbc$copper)
 typeof(pbc$ast)
 ```
 
-This concludes your introduction to using packages and built-in datasets.
+This concludes your introduction to using packages and built-in data sets.

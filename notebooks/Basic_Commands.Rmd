@@ -92,8 +92,7 @@ print(a)
 The above chunk uses a built-in function `print` which displays the given input.
 
 ## Vectors
-In R, it is common work with large amounts of data. Data can be stored in various
-formats. One basic data type is a vector.
+In R, it is common work with large amounts of data. Data can be stored in various formats. One basic data type is a vector.
 
 ### Creating a vector
 ```{r}
@@ -104,7 +103,7 @@ Here, we again use a built-in function `c` which stands for combine.
 
 ### Single Vector Operations
 
-In reseach and data science we often want to perform operations on vectors of data.
+In research and data science we often want to perform operations on vectors of data.
 
 For example, we may want to sum the vector or find the mean of it.
 
@@ -123,10 +122,10 @@ max(vector_1)
 vector_2 = c(a, b, c, d)
 print(vector_2)
 ```
-It looks like vector_1 and vector_2 do not match because a was modified above.
+It looks like vector_1 and vector_2 do not match because `a` was modified above.
 
 We will use the `setequal` function to compare them.
-This function takes two arguements and will return TRUE if they are equal else FALSE.
+This function takes two arguments and will return `TRUE` if they are equal else `FALSE`.
 
 To learn more about the function, we can run `?setequal` and see if help info is available.
 
@@ -157,10 +156,9 @@ setequal(vector_1, vector_2)
 ```
 Here we can see that the two vectors are equal.
 
-R can perform vector math as well. Here we will create a third vector adding
-vector_1 and vector_2.
+R can perform vector math as well. Here we will create a third vector adding vector_1 and vector_2.
 
-### Assigning value to item in vector
+### Vector addition
 ```{r}
 vector_3 = vector_1 + vector_2
 ```
@@ -192,13 +190,20 @@ print(vector_4)
 ```
 
 ### DataFrames
-Multiple vectors can be combined into dataframes.
+Multiple vectors can be combined into data frames.
 
-Use the commands `rbind` combine vectors as rows.
+Use the command `rbind` to combine vectors as rows.
 
 ```{r}
 df1 = rbind(vector_1, vector_2, vector_3)
 print(df1)
+```
+
+Use the command `cbind` to combine vectors as columns.
+
+```{r}
+df2 = cbind(vector_1, vector_2, vector_3)
+print(df2)
 ```
 
 ### Column and row names
