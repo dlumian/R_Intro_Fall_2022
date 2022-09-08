@@ -11,15 +11,16 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
+```{r}
 library(survival)
 library(tidyverse)
 ```
-## Create a directory for output of images
-```{r cars}
+### Get current working directory
+```{r}
 getwd()
 ```
-```{r cars}
+## Create a directory for output of images
+```{r}
 img_path = "../images"
 dir.create(img_path)
 ```
@@ -27,6 +28,13 @@ dir.create(img_path)
 # Data Visualization with ggplot
 
 Plotting a single discrete variable(sex) as a bar plot.  Here the y-axis is the number of patients that are male versus female.
+
+Let's calculate the numbers we expect before generating the plot.
+```{r}
+age_count = pbc %>% group_by(sex) %>% summarize(age_cnt = length(age))
+age_count
+```
+Now, let's plot the data.
 ```{r}
 ggplot(pbc, aes(x=sex)) + geom_bar()
 ```
@@ -41,7 +49,7 @@ ggplot gives a warning that the default binwidth may not be the most suitable fo
 ggplot(pbc, aes(x=age)) + geom_histogram(binwidth=5)
 ```
 
-Histograms are easier to create when the underlying data distribution is already known, making it harder to use for exploration.  It is also a count based method so comparing across datasets of differing numbers would be difficult. A density plot is similar to a histogram. 
+Histograms are easier to create when the underlying data distribution is already known, making it harder to use for exploration.  It is also a count based method so comparing across data sets of differing numbers would be difficult. A density plot is similar to a histogram. 
 ```{r}
 ggplot(pbc, aes(age)) + geom_density()
 ```

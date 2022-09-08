@@ -11,9 +11,9 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-Running this in a new project or on your own computer for the fist time you would need to run install.packages("survival").  Thereafter you only need to turn on the package. 
+Running this in a new project or on your own computer for the fist time you would need to run `install.packages("survival")`.  Thereafter you only need to turn on the package. 
 
-THe `tidyverse` package will also have to be installed and turned on.
+The `tidyverse` package will also have to be installed and turned on.
 ```{r}
 library(survival)
 library(tidyverse)
@@ -21,7 +21,7 @@ library(tidyverse)
 
 ### PBC Dataset
 
-You will read in the pbc dataset from the survival package as a tibble. To find more information on the pbc dataset you can use ?pbc or use the help tab in the right hand side and search pbc.  This gives more information on how the data was created and what is in each column.
+You will read in the pbc data set from the survival package. To find more information on the pbc data set you can use ?pbc or use the help tab in the right hand side and search pbc.  This gives more information on how the data was created and what is in each column.
 ```{r}
 pbc
 ```
@@ -36,7 +36,7 @@ You can also sort on descending order. You will again use age and this time the 
 pbc_arrange <- arrange(pbc, desc(age))
 pbc_arrange
 ```
-This is a large dataset, let's say you want to subset the data to just the columns of information you need for your analysis. You can use the select function. Let's say you are interested in just the patient id, sex and age.
+This is a large data set, let's say you want to subset the data to just the columns of information you need for your analysis. You can use the select function. Let's say you are interested in just the patient id, sex and age.
 ```{r}
 pbc_select <- select(pbc, id, sex, age)
 pbc_select
@@ -46,7 +46,7 @@ For reference you can use the "-" to select every column but the ones listed
 pbc_select <- select(pbc, -id, -sex, -age)
 pbc_select
 ```
-You may only be interested in the male patients for this dataset. You can use the filter function to select only rows where sex is equal to "m" for male.
+You may only be interested in the male patients for this data set. You can use the filter function to select only rows where sex is equal to "m" for male.
 ```{r}
 pbc_filter <- filter(pbc, sex=="m") 
 pbc_filter
@@ -73,7 +73,7 @@ You can also group the data based on a specified variable or group of variables.
 group_by_sex <- group_by(pbc,sex)
 group_by_sex
 ```
-Interestingly nothing changes about the data that can be seen in the table. You can use the groups function to look at how the data is. You can always use View(pbc) to look at the original dataset. 
+Interestingly nothing changes about the data that can be seen in the table. You can use the groups function to look at how the data is. You can always use View(pbc) to look at the original data set. 
 ```{r}
 groups(group_by_sex)
 groups(pbc)
