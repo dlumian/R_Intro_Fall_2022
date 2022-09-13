@@ -1,0 +1,133 @@
+---
+title: "Linear_Regression"
+author: "Daniel Lumian"
+date: '2022-09-12'
+output: pdf_document
+---
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(tidyverse)
+library(caret)
+```
+
+```{r}
+covid = read.csv("../../data/imputed-data.csv")
+covid
+```
+
+```{r}
+unique(covid$date)
+```
+
+```{r}
+most_recent = covid[covid$date == "09/16/20", ]
+most_recent
+```
+
+```{r}
+write.csv(most_recent, file = "../../data/Covid-19-Data.csv", row.names = FALSE)
+```
+
+```{r}
+summary(most_recent)
+```
+
+
+```{r}
+unique(most_recent$state_name)
+```
+
+
+```{r}
+most_recent = covid[covid$date == "09/16/20", ]
+most_recent
+```
+
+```{r}
+colnames(most_recent)
+```
+
+```{r}
+subset_data = select(most_recent,covid_19_confirmed_cases, social_distancing_total_grade,
+                     total_population, percent_smokers, percent_insured, median_household_income)
+subset_data
+```
+
+```{r}
+sort(unique(subset_data$social_distancing_total_grade), decreasing = TRUE)
+```
+
+```{r}
+subset_data = subset_data %>% mutate(SDTG_numeric = recode(
+  social_distancing_total_grade, "F"=0,  "D-"=1,  "D"=2, "D+"=3, "C-"=4, "C"=5,
+  "C+"=6,  "B-"=7, "B"=8, "B+"=9,  "A"=10 ))
+subset_data
+```
+
+```{r}
+subset_data = select(subset_data, -social_distancing_total_grade)
+```
+
+```{r}
+out = boxplot.stats(subset_data$covid_19_confirmed_cases)$out
+
+boxplot(subset_data$covid_19_confirmed_cases,
+        ylab = "Confirmed Covid Cases",
+        main = "Boxplot of target variable"
+)
+```
+```{r}
+subset_data = filter(subset_data, covid_19_confirmed_cases<1000)
+```
+
+```{r}
+out = boxplot.stats(subset_data$covid_19_confirmed_cases)$out
+
+boxplot(subset_data$covid_19_confirmed_cases,
+        ylab = "Confirmed Covid Cases",
+        main = "Boxplot of target variable"
+)
+```
+
+```{r}
+pairs(subset_data)
+```
+
+```{r}
+trainDataIndex = createDataPartition(subset_data$covid_19_confirmed_cases, p=0.7, list = FALSE)
+trainData = subset_data[trainDataIndex, ]
+testData = subset_data[-trainDataIndex, ]
+```
+
+```{r}
+linregmod = lm(covid_19_confirmed_cases ~ ., data=trainData)
+```
+
+```{r}
+print(summary(linregmod))
+```
+
+```{r}
+testData$predictions = predict(linregmod, newdata = testData)
+testData$predictions
+```
+
+```{r}
+ggplot(testData, aes(x=covid_19_confirmed_cases, y=predictions)) +
+  geom_point()
+```
+
+
+```{r}
+plot(linregmod, 1)
+```
+
+
+```{r}
+plot(linregmod, 2)
+```

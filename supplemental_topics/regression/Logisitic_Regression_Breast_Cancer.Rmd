@@ -12,13 +12,13 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
 If you do not have the mlbench package installed, be sure to run `install.packages("mlbench")` and
-then run the cell below
+then run the cell below.
 ```{r}
 library(mlbench)
 ```
 
 We will use the breast cancer data set from the mlbench package.
-We will only work with complete cases (i.e., those with no missing data)
+We will only work with complete cases (i.e., those with no missing data).
 ```{r}
 data(BreastCancer, package = "mlbench")
 bc = BreastCancer[complete.cases(BreastCancer), ] 
@@ -78,7 +78,7 @@ library(yardstick)
 set.seed(1)
 ```
 
-Next, lets create a training and test dataset from the dataframe. We will use 
+Next, lets create a training and test data set from the data frame. We will use 
 70% of the data to train with and 30% to test with.
 ```{r}
 trainDataIndex = createDataPartition(bc$Class, p=0.7, list = FALSE)
