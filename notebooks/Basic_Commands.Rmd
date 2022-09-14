@@ -11,7 +11,6 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. 
 
-
 You can embed an R code chunk like below.
 
 Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
@@ -79,8 +78,7 @@ b / b
 c * c
 d ** d
 ```
-
-Notice here, our results are identical to the cell above which just used numbers.
+Notice here, our results are identical to the chunk above which just used numbers.
 
 Variables are mutable, that is they can be changed. 
 
@@ -147,6 +145,7 @@ Let's alter vector_2 so that they match.
 vector_2[1]=1
 print(vector_2)
 ```
+We can see in the output above that the first item in the vector was set to `1`.
 
 To compare two vectors in R, we again use `setequal`. 
 
@@ -224,11 +223,9 @@ To learn more about this argument you can run `?rownames`.
 colnames(df2)
 rownames(df2, do.NULL=FALSE)
 ```
-
 It can often be helpful to supply row and column names.
 
 See the next chunk for how to do so.
-
 ```{r}
 colnames(df2) = c("Col1", "Col2", "Col3")
 rownames(df2) = c("Row1", "Row2", "Row3", "Row4")

@@ -32,8 +32,7 @@ data()
 
 For today's session we will begin by looking at a built-in data set, known as iris.
 
-To see the data, simply run the word `iris` in a code block.
-
+To see the data, simply run the command `iris` in a code chunk.
 ```{r}
 iris
 ```
@@ -42,7 +41,6 @@ As shown, there are 5 columns and 150 rows.
 When wrangling data, it is often best to start by getting a summary of the data.
 
 To do so, run the next chunk.
-
 ```{r}
 summary(iris)
 ```
@@ -90,6 +88,7 @@ You can specify columns to be returned as well. For example,
 iris[iris$Species=="setosa", c("Sepal.Length", "Sepal.Width")]
 ```
 
+If you need a list of column names run the following command:
 ```{r}
 colnames(iris)
 ```
@@ -100,7 +99,7 @@ examples to columns or rows of a data set.
 
 Let's also introduce the `cat` command here. `cat` is used to concatenate info together.
 
-Here we will concat our output to ensure their meaning is clear.
+Here we will concat our output to ensure the meaning is clear.
 
 ```{r}
 column_of_interest = "Sepal.Length"
@@ -124,7 +123,7 @@ library(survival)
 
 ### PBC Dataset
 
-You will read in the pbc data set from the survival package. To find more information on the pbc data set you can use ?pbc or use the help tab in the right hand side and search pbc.  This gives more information on how the data was created and what is in each column.
+You will read in the pbc data set from the survival package. To find more information on the pbc data set you can use `?pbc` or use the help tab in the right hand side and search for pbc.  This gives more information on how the data was created and what is in each column.
 ```{r}
 pbc
 ```
@@ -146,7 +145,7 @@ Missing data can cause some functions to not run or to return a NULL value, so
 it's important to note when data is missing.
 
 ### Data Exploration
-You can also select single columns with a `$`.
+You can select a single columns with a `$`.
 ```{r}
 pbc$copper
 ```

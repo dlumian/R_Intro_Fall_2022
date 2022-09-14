@@ -21,7 +21,7 @@ library(tidyverse)
 
 ### PBC Dataset
 
-You will read in the pbc data set from the survival package. To find more information on the pbc data set you can use ?pbc or use the help tab in the right hand side and search pbc.  This gives more information on how the data was created and what is in each column.
+You will read in the pbc data set from the survival package. To find more information on the pbc data set you can use `?pbc` or use the help tab in the right hand side and search pbc.  This gives more information on how the data was created and what is in each column.
 ```{r}
 pbc
 ```
