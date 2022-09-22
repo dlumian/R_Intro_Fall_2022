@@ -124,7 +124,7 @@ mean(y_pred_factor == testData$Class)
 
 We will use a confusion matrix to see how our model predictions perform.
 ```{r}
-confusionMatrix(testData$Class, y_pred_factor)
+confusionMatrix(testData$Class, y_pred_factor, positive = "1")
 ```
 
 We can plot the confusion matrix for a better visualization of the results. 

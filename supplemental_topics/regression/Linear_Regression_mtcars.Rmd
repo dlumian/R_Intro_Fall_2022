@@ -1,0 +1,77 @@
+---
+title: "Linear_Regression"
+author: "Daniel Lumian"
+date: '2022-09-22'
+output: pdf_document
+---
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+Reminder, if you have not downloaded the package, use `install.packages("gapminder")` first.
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+
+```{r}
+head(mtcars)
+```
+
+
+```{r}
+colnames(mtcars)
+```
+
+
+```{r}
+str(mtcars)
+```
+
+```{r}
+?mtcars
+```
+
+```{r}
+ggplot(mtcars, aes(x = qsec, y = mpg)) + geom_point() + geom_smooth(method=lm)
+```
+
+
+```{r}
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point() + geom_smooth(method=lm)
+```
+
+```{r}
+ggplot(mtcars, aes(x = carb, y = mpg)) + geom_point() + geom_smooth(method=lm)
+```
+
+Next, lets create a training and test data set from the data frame. We will use 
+70% of the data to train with and 30% to test with.
+```{r}
+trainDataIndex = createDataPartition(mtcars$mpg, p=0.7, list = FALSE)
+trainData = mtcars[trainDataIndex, ]
+testData = mtcars[-trainDataIndex, ]
+```
+
+```{r}
+model <- lm(mpg ~ carb + qsec + wt, data = trainData)
+model
+```
+
+```{r}
+summary(model)
+```
+
+```{r}
+pred = predict(model, newdata = testData)
+pred
+testData$predictions = pred
+```
+
+```{r}
+ggplot(testData, aes(x = mpg, y = predictions)) + geom_point() + geom_smooth(method=lm)
+```
