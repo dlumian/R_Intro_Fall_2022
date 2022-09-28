@@ -11,40 +11,43 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-Reminder, if you have not downloaded the package, use `install.packages("gapminder")` first.
+Reminder, if you have not downloaded the package, use `install.packages("tidyverse")` first.
 ```{r}
-library(gapminder)
 library(tidyverse)
 ```
 
-
+We'll use the mtcars dataset for this example. Let's take a look at the head of the data.
 ```{r}
 head(mtcars)
 ```
 
-
+We can see all the column names using `colnames`.
 ```{r}
 colnames(mtcars)
 ```
 
-
+`str(mtcars)` will give additional information about the data set.
 ```{r}
 str(mtcars)
 ```
 
+Finally, to examine the data set we can get the help information on it.
 ```{r}
 ?mtcars
 ```
 
+Use scatterplots to examine the relationship between individual variables.
+
+We will start by comparing qsec with mpg.
 ```{r}
 ggplot(mtcars, aes(x = qsec, y = mpg)) + geom_point() + geom_smooth(method=lm)
 ```
 
-
+Next, we will compare weight with mpg.
 ```{r}
 ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point() + geom_smooth(method=lm)
 ```
-
+Finally, let's compare carb with mpg.
 ```{r}
 ggplot(mtcars, aes(x = carb, y = mpg)) + geom_point() + geom_smooth(method=lm)
 ```
@@ -57,21 +60,25 @@ trainData = mtcars[trainDataIndex, ]
 testData = mtcars[-trainDataIndex, ]
 ```
 
+Next, we fit the model using the training dataset.
 ```{r}
 model <- lm(mpg ~ carb + qsec + wt, data = trainData)
 model
 ```
 
+`summary` on the model will provide output on the metrics of the model.
 ```{r}
 summary(model)
 ```
 
+We can now use the model to predict with on the test data set.
 ```{r}
 pred = predict(model, newdata = testData)
 pred
 testData$predictions = pred
 ```
 
+Then, we can plot the predictions against actual values to see how well the model did.
 ```{r}
 ggplot(testData, aes(x = mpg, y = predictions)) + geom_point() + geom_smooth(method=lm)
 ```

@@ -142,7 +142,7 @@ v_mpg = mtcars[mtcars$vs==0, "mpg"]
 v_mpg
 s_mpg = mtcars[mtcars$vs==1, "mpg"]
 s_mpg
-t.test(mtcars$mpg~mtcars$vs)
+t.test(v_mpg, s_mpg)
 ```
 Notice, the results are identical. This just demonstrates that the test can be run
 with data in various formats.
@@ -174,7 +174,7 @@ ChickWeight data set. We will start by examining the data and reshaping it.
 Then we will run a paired samples t-test.
 
 ```{r}
-ChickWeight
+head(ChickWeight)
 ```
 
 See the help for definitions of each column.

@@ -13,14 +13,17 @@ is suggested for running the notebooks.
 1. Data_Manipulation.Rmd
 1. Data_Import_and_Export.Rmd
 1. Data_Visualizations.Rmd
+1. Data_Analysis.Rmd
 
 The Introduction_to_R.pptx presentation has additional guidance on all notebooks.
 
 The repo has the following directories to help organize material:
 - notebooks
-    + Where all notebooks should be stored
+    + Where training notebooks should be stored
 - data
     + Where all data files (csvs, excel and tab-delimited tables) should be stored
 - images
     + Where all image files should be stored including those created by the notebooks
+- supplemental_topics
+    + Additional notebooks and ppts for more advanced topics
 
